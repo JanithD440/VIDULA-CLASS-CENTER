@@ -17,10 +17,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="student-management.html">Student Management</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="student-management.html">Student Management</a></li>
                         <li class="nav-item"><a class="nav-link" href="teacher-management.html">Teacher Management</a></li>
                         <li class="nav-item"><a class="nav-link" href="class-details.html">Class Details</a></li>
-                       
                         <li class="nav-item"><a class="nav-link" href="reports.html">Reports</a></li>
                         <li class="nav-item"><a class="nav-link" href="month-end-commission.html">Month-End Commission</a></li>
                         <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
@@ -36,7 +35,7 @@
         <!-- Buttons to trigger Modals -->
         <div class="mb-3">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">Registration</button>
-            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#viewModal">View</button>
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#viewModal">View All</button>
             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#moreOptionsModal">More Options</button>
         </div>
 
@@ -60,18 +59,16 @@
                                 <input type="text" class="form-control" id="studentName" placeholder="Name">
                             </div>
                             <div class="mb-3">
-                                <label for="studenteAge" class="form-label">Age</label>
-                                <input type="age" class="form-control" id="studentAge" placeholder="Age">
+                                <label for="studentAge" class="form-label">Age</label>
+                                <input type="number" class="form-control" id="studentAge" placeholder="Age">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Gender</label>
                                 <select class="form-control" id="studentGender">
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
-                                    
                                 </select>
                             </div>
-                            
                             <div class="mb-3">
                                 <label for="studentContact" class="form-label">Contact</label>
                                 <input type="text" class="form-control" id="studentContact" placeholder="Contact number">
@@ -84,7 +81,6 @@
                                 <label for="studentGrade" class="form-label">Grade</label>
                                 <input type="text" class="form-control" id="studentGrade" placeholder="Grade">
                             </div>
-                            
                             <button type="submit" class="btn btn-success">Submit</button>
                         </form>
                     </div>
@@ -92,133 +88,236 @@
             </div>
         </div>
 
-        <!-- View Modal -->
-        <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="viewModalLabel">View Registration</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="viewStudentID" class="form-label">Student ID</label>
-                            <input type="text" class="form-control" id="viewStudentID" placeholder="Enter student ID to view details">
-                        </div>
-                        <button class="btn btn-primary" onclick="viewStudentDetails()">View Details</button>
-                    </div>
+        <!-- View Modal (With Single Search Bar) -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="viewModalLabel">View Registered Students</h5>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Single Search Bar -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="viewStudentID" placeholder="Enter Student ID">
+                    <button class="btn btn-primary" onclick="viewStudentDetails()">Search</button>
+                </div>
+
+                <!-- Styled Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Contact</th>
+                                <th>Subject</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>John Doe</td>
+                                <td class="text-center">18</td>
+                                <td class="text-center">Male</td>
+                                <td>0765403331</td>
+                                <td>Maths</td>
+                                <td class="text-center">A</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- More Options Modal -->
-        <div class="modal fade" id="moreOptionsModal" tabindex="-1" aria-labelledby="moreOptionsModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="moreOptionsModalLabel">Previous Registration and Options</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      
-
-                        <!-- Search Bar to Filter Previous Registration -->
-                        <div class="mt-4">
-                            <input type="text" class="form-control" id="searchPreviousRegistrations" placeholder="Search by name or ID">
-                        </div>
-
-                        <!-- Table for Previous Registrations -->
-                        <table class="table table-bordered mt-3" id="previousRegistrationsTable">
-                            <thead>
-                                <tr>
-                                    <th>Student ID</th>
-                                    <th>Student Name</th>
-                                    <th>Age</th>
-                                    <th>Gender</th>
-                                    <th>Contact</th>
-                                    <th>Subject</th>
-                                    <th>Grade</th>
-                                    <th>Action</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>John Doe</td>
-                                    <td>18</td>
-                                    <td>Male</td>
-                                    <td>0765403331</td>
-                                    <td>Maths</td>
-                                    <td>Al</td>
-                                    
-                                    <td>
-                                        <button class="btn btn-warning btn-sm" onclick="updateRegistration(1)">Update</button>
-                                        <button class="btn btn-danger btn-sm" onclick="deleteRegistration(1)">Delete</button>
-                                    </td>
-                                </tr>
-                                
-                        </table>
-                    </div>
+        <!-- More Options Modal (Now Contains Registration Form, Search Bar with Button, Update & Delete Buttons) -->
+<div class="modal fade" id="moreOptionsModal" tabindex="-1" aria-labelledby="moreOptionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="moreOptionsModalLabel">More Options - Student Management</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Search Bar with Button -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="searchStudent" placeholder="Search by name or ID">
+                    <button class="btn btn-primary" type="button" onclick="searchStudent()">Search</button>
                 </div>
+
+                <!-- Registration Form -->
+                <form id="moreOptionsForm">
+                    <div class="mb-3">
+                        <label for="studentID" class="form-label">Student ID</label>
+                        <input type="text" class="form-control" id="studentID" placeholder="Student ID">
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentName" class="form-label">Student Name</label>
+                        <input type="text" class="form-control" id="studentName" placeholder="Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentAge" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="studentAge" placeholder="Age">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label>
+                        <select class="form-control" id="studentGender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentContact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" id="studentContact" placeholder="Contact number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentSubject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="studentSubject" placeholder="Subject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentGrade" class="form-label">Grade</label>
+                        <input type="text" class="form-control" id="studentGrade" placeholder="Grade">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-warning" onclick="updateStudent()">Update</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteStudent()">Delete</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+</div>
+
+
+
     </main>
 
     <footer class="bg-primary text-white text-center py-3 mt-5">
         <p>&copy; 2025 Vidula Class Center. All rights reserved.</p>
     </footer>
-
-    <!-- Script to handle search, update, and delete for registration records -->
     <script>
-        // Search functionality for previous registrations
-        document.getElementById('searchPreviousRegistrations').addEventListener('keyup', function() {
-            let filter = this.value.toUpperCase();
-            let rows = document.getElementById('previousRegistrationsTable').getElementsByTagName('tr');
-            for (let i = 1; i < rows.length; i++) {
-                let cells = rows[i].getElementsByTagName('td');
-                let nameCell = cells[1]; // Student Name column
-                let idCell = cells[0];   // Student ID column
-                if (nameCell || idCell) {
-                    let nameText = nameCell.textContent || nameCell.innerText;
-                    let idText = idCell.textContent || idCell.innerText;
-                    if (nameText.toUpperCase().indexOf(filter) > -1 || idText.indexOf(filter) > -1) {
-                        rows[i].style.display = "";
-                    } else {
-                        rows[i].style.display = "none";
-                    }
+        document.addEventListener("DOMContentLoaded", function () {
+    // Handle student registration
+    document.getElementById("registrationForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let studentData = {
+            id: document.getElementById("studentID").value,
+            name: document.getElementById("studentName").value,
+            age: document.getElementById("studentAge").value,
+            gender: document.getElementById("studentGender").value,
+            contact: document.getElementById("studentContact").value,
+            subject: document.getElementById("studentSubject").value,
+            grade: document.getElementById("studentGrade").value,
+        };
+
+        fetch("/api/students", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(studentData),
+        })
+            .then(response => response.json())
+            .then(data => alert("Student Registered Successfully!"))
+            .catch(error => console.error("Error:", error));
+    });
+
+    // View all students
+    function viewStudentDetails() {
+        let studentID = document.getElementById("viewStudentID").value;
+        let url = studentID ? `/api/students/${studentID}` : "/api/students";
+        
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                let tableBody = document.querySelector("#viewModal tbody");
+                tableBody.innerHTML = "";
+                data.forEach(student => {
+                    let row = `<tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.age}</td>
+                        <td>${student.gender}</td>
+                        <td>${student.contact}</td>
+                        <td>${student.subject}</td>
+                        <td>${student.grade}</td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error("Error:", error));
+    }
+    window.viewStudentDetails = viewStudentDetails;
+
+    // Search student
+    function searchStudent() {
+        let searchQuery = document.getElementById("searchStudent").value;
+        fetch(`/api/students/search?query=${searchQuery}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    document.getElementById("studentID").value = data.id;
+                    document.getElementById("studentName").value = data.name;
+                    document.getElementById("studentAge").value = data.age;
+                    document.getElementById("studentGender").value = data.gender;
+                    document.getElementById("studentContact").value = data.contact;
+                    document.getElementById("studentSubject").value = data.subject;
+                    document.getElementById("studentGrade").value = data.grade;
+                } else {
+                    alert("Student not found");
                 }
-            }
-        });
+            })
+            .catch(error => console.error("Error:", error));
+    }
+    window.searchStudent = searchStudent;
 
-        // Handle registration form submission
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Student Registered Successfully!');
-            // Logic to save registration data goes here
-        });
+    // Update student details
+    function updateStudent() {
+        let studentID = document.getElementById("studentID").value;
+        let studentData = {
+            name: document.getElementById("studentName").value,
+            age: document.getElementById("studentAge").value,
+            gender: document.getElementById("studentGender").value,
+            contact: document.getElementById("studentContact").value,
+            subject: document.getElementById("studentSubject").value,
+            grade: document.getElementById("studentGrade").value,
+        };
 
-        // View Student Details
-        function viewStudentDetails() {
-            let studentID = document.getElementById('viewStudentID').value;
-            alert('Viewing details for student ID: ' + studentID);
-            // Logic to display student details based on ID
+        fetch(`/api/students/${studentID}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(studentData),
+        })
+            .then(response => response.json())
+            .then(data => alert("Student Updated Successfully!"))
+            .catch(error => console.error("Error:", error));
+    }
+    window.updateStudent = updateStudent;
+
+    // Delete student
+    function deleteStudent() {
+        let studentID = document.getElementById("studentID").value;
+        if (!studentID) {
+            alert("Please enter a valid Student ID");
+            return;
         }
 
-        // Update Registration
-        function updateRegistration(id) {
-            alert('Updating registration for student ID: ' + id);
-            // Logic for updating registration goes here
-        }
-
-        // Delete Registration
-        function deleteRegistration(id) {
-            if (confirm('Are you sure you want to delete registration for student ID: ' + id + '?')) {
-                alert('Deleted registration for student ID: ' + id);
-                // Logic to delete registration goes here
-            }
-        }
+        fetch(`/api/students/${studentID}`, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(data => alert("Student Deleted Successfully!"))
+            .catch(error => console.error("Error:", error));
+    }
+    window.deleteStudent = deleteStudent;
+});
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+    </script>
 </body>
 </html>

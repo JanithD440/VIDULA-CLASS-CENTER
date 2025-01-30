@@ -37,7 +37,7 @@
         <!-- Buttons for actions -->
         <div class="mb-3">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">Registration</button>
-            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#viewModal">View</button>
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#viewModal">View All</button>
             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#moreOptionsModal">More Options</button>
         </div>
 
@@ -90,89 +90,128 @@
             </div>
         </div>
 
-        <!-- View Modal -->
         <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="viewModalLabel">View Teacher Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="viewTeacherID" class="form-label">Teacher ID</label>
-                            <input type="text" class="form-control" id="viewTeacherID" placeholder="Enter Teacher ID">
-                        </div>
-                        <button class="btn btn-primary" onclick="viewTeacherDetails()">View Details</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- More Options Modal -->
-        <div class="modal fade" id="moreOptionsModal" tabindex="-1" aria-labelledby="moreOptionsModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="moreOptionsModalLabel">Previous Teacher Registrations</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title" id="viewModalLabel">View Teacher Details</h5>
+                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- Search Bar -->
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="searchTeachers" placeholder="Search by Name or ID">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="viewTeacherID" placeholder="Enter Teacher ID">
+                            <button class="btn btn-primary" onclick="viewTeacherDetails()">Search</button>
                         </div>
-
-                        <!-- Table for Registered Teachers -->
-                        <table class="table table-bordered mt-3" id="teacherTable">
-                            <thead>
-                                <tr>
-                                    <th>Teacher ID</th>
-                                    <th>Name</th>
-                                    <th>Subject</th>
-                                    <th>Contact</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>101</td>
-                                    <td>John Doe</td>
-                                    <td>Mathematics</td>
-                                    <td>123-456-7890</td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm" onclick="updateTeacher(101)">Update</button>
-                                        <button class="btn btn-danger btn-sm" onclick="deleteTeacher(101)">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+        
+                        <!-- Styled Details Table -->
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered align-middle">
+                                <thead class="table-dark text-center">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Age</th>
+                                        <th>Gender</th>
+                                        <th>Subject</th>
+                                        <th>Contact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="tdTeacherID" class="text-center">101</td>
+                                        <td id="tdTeacherName">John Doe</td>
+                                        <td id="tdTeacherAddress">123 Main St</td>
+                                        <td id="tdTeacherAge" class="text-center">35</td>
+                                        <td id="tdTeacherGender" class="text-center">Male</td>
+                                        <td id="tdTeacherSubject">Mathematics</td>
+                                        <td id="tdTeacherContact">123-456-7890</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        
+
+
+       <!-- More Options Modal (Updated with Registration Form, Search Bar, Update & Delete Buttons) -->
+<div class="modal fade" id="moreOptionsModal" tabindex="-1" aria-labelledby="moreOptionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="moreOptionsModalLabel">More Options - Teacher Management</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            
+            <!-- Search Bar (Inside More Options Modal) -->
+<div class="mb-3">
+    <label for="searchTeachers" class="form-label">Search by Name or ID</label>
+    <div class="input-group">
+        <input type="text" class="form-control" id="searchTeachers" placeholder="Enter Teacher Name or ID">
+        <button class="btn btn-primary" type="button" onclick="searchTeacher()">Search</button>
+    </div>
+</div>
+
+
+                
+
+                <!-- Registration Form -->
+                <form id="moreOptionsForm">
+                    <div class="mb-3">
+                        <label for="teacherID" class="form-label">Teacher ID</label>
+                        <input type="text" class="form-control" id="teacherID" placeholder="Teacher ID">
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="teacherName" placeholder="Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherAddress" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="teacherAddress" placeholder="Address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherAge" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="teacherAge" placeholder="Age">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label>
+                        <select class="form-control" id="teacherGender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherSubject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="teacherSubject" placeholder="Subject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="teacherContact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" id="teacherContact" placeholder="Contact Number">
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-warning" onclick="updateTeacher()">Update</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteTeacher()">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
     </main>
 
     <footer class="bg-primary text-white text-center py-3 mt-5">
         <p>&copy; 2025 Vidula Class Center. All rights reserved.</p>
     </footer>
 
-    <script>
-        function viewTeacherDetails() {
-            let teacherID = document.getElementById('viewTeacherID').value;
-            alert('Viewing details for teacher ID: ' + teacherID);
-        }
-
-        function updateTeacher(id) {
-            alert('Updating teacher ID: ' + id);
-        }
-
-        function deleteTeacher(id) {
-            if (confirm('Are you sure you want to delete teacher ID: ' + id + '?')) {
-                alert('Deleted teacher ID: ' + id);
-            }
-        }
-    </script>
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
