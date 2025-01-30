@@ -1,0 +1,80 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    color: #fff;
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: rgba(0, 123, 255, 0.9) !important;
+    padding: 15px;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+    transition: 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffc107 !important;
+}
+
+/* Main Content */
+.container {
+    margin-top: 50px;
+}
+
+/* Card Styling */
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+}
+
+.card h5 {
+    font-weight: bold;
+}
+
+.card p {
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background: #ffc107;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background: #ffdd57;
+    color: #000;
+}
+
+/* Footer */
+footer {
+    background: rgba(0, 123, 255, 0.9);
+    padding: 15px;
+    margin-top: 50px;
+    font-size: 0.9rem;
+}
+
+
+   
+    

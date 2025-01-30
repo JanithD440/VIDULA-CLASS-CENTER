@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../index.html">Vidula Class Center</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="student-management.html">Student Management</a></li>
+                        <li class="nav-item"><a class="nav-link" href="teacher-management.html">Teacher Management</a></li>
+                        <li class="nav-item"><a class="nav-link" href="class-details.html">Class Details</a></li>
+                        <li class="nav-item"><a class="nav-link" href="reports.html">Reports</a></li>
+                        <li class="nav-item"><a class="nav-link" href="month-end-commission.html">Month-End Commission</a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <h1>Student Management</h1>
+
+        <!-- Buttons to trigger Modals -->
+        <div class="mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">Registration</button>
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#viewModal">View All</button>
+            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#moreOptionsModal">More Options</button>
+        </div>
+
+        <!-- Registration Modal -->
+        <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registrationModalLabel">Student Registration</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registrationForm">
+                            <div class="mb-3">
+                                <label for="studentID" class="form-label">Student ID</label>
+                                <input type="text" class="form-control" id="studentID" placeholder="Student ID">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="studentName" class="form-label">Student Name</label>
+                                <input type="text" class="form-control" id="studentName" placeholder="Name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="studentAge" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="studentAddress" placeholder="Address">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Gender</label>
+                                <select class="form-control" id="studentGender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="studentSubject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="studentSubject" placeholder="Subject">
+                            </div>
+                            <div class="mb-3">
+                                <label for="studentGrade" class="form-label">Grade</label>
+                                <input type="text" class="form-control" id="studentGrade" placeholder="Grade">
+                            </div>
+                            <button type="submit" class="btn btn-success" onclick="addStudent()">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Modal (With Single Search Bar) -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="viewModalLabel">View Registered Students</h5>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+        
+                <!-- Styled Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Address</th>
+                                <th>Gender</th>
+                                <th>Subject</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center"></td>
+                                <td></td>
+                                <td class="text-center"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- More Options Modal (Now Contains Registration Form, Search Bar with Button, Update & Delete Buttons) -->
+<div class="modal fade" id="moreOptionsModal" tabindex="-1" aria-labelledby="moreOptionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="moreOptionsModalLabel">More Options - Student Management</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Search Bar with Button -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="searchStudent" placeholder="Search by name or ID">
+                    <button class="btn btn-primary" type="button" onclick="viewStudentDetails()">Search</button>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="moreOptionsForm">
+                    <div class="mb-3">
+                        <label for="studentName" class="form-label">Student Name</label>
+                        <input type="text" class="form-control" id="studentName" placeholder="Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentAge" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="studentAddress" placeholder="Address">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label>
+                        <select class="form-control" id="studentGender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentSubject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="studentSubject" placeholder="Subject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentGrade" class="form-label">Grade</label>
+                        <input type="text" class="form-control" id="studentGrade" placeholder="Grade">
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-warning" onclick="updateStudent()">Update</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteStudent()">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    </main>
+
+    <footer class="bg-primary text-white text-center py-3 mt-5">
+        <p>&copy; 2025 Vidula Class Center. All rights reserved.</p>
+    </footer>
+    <script>
+        
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="../script/student.js"></script>
+        
+</body>
+</html>

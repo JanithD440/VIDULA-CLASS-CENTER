@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../index.html">Vidula Class Center</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="student-management.html">Student Management</a></li>
+                        <li class="nav-item"><a class="nav-link" href="teacher-management.html">Teacher Management</a></li>
+                        <li class="nav-item"><a class="nav-link" href="class-details.html">Class Details</a></li>
+                       
+                        <li class="nav-item"><a class="nav-link" href="reports.html">Reports</a></li>
+                        <li class="nav-item"><a class="nav-link" href="month-end-commission.html">Month-End Commission</a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <h1>Class Details</h1>
+
+        <!-- Buttons for actions -->
+        <div class="mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrationModal">Registration</button>
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#viewModal">View All</button>
+            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#moreOptionsModal">More Options</button>
+        </div>
+
+        <!-- Registration Modal -->
+        <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registrationModalLabel">Class Registration</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="classRegistrationForm">
+                            <div class="mb-3">
+                                <label for="classID" class="form-label">Class ID</label>
+                                <input type="text" class="form-control" id="classID" placeholder="Enter Class ID">
+                            </div>
+                            <div class="mb-3">
+                                <label for="className" class="form-label">Class Name</label>
+                                <input type="text" class="form-control" id="className" placeholder="Enter Class Name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="teacherName" class="form-label">Teacher</label>
+                                <input type="text" class="form-control" id="teacherName" placeholder="Enter Teacher Name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="schedule" class="form-label">Schedule</label>
+                                <input type="text" class="form-control" id="schedule" placeholder="Enter Class Schedule">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fee" class="form-label">Class Fee</label>
+                                <input type="number" class="form-control" id="fee" placeholder="Enter Class Fee">
+                            </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Modal -->
+        <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewModalLabel">View Class Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="viewClassID" placeholder="Enter Class ID">
+                        </div>
+                        <button class="btn btn-primary" onclick="viewClassDetails()">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Options Modal -->
+        <div class="modal fade" id="moreOptionsModal" tabindex="-1" aria-labelledby="moreOptionsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="moreOptionsModalLabel">Previous Class Registrations</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Search Bar -->
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="searchClasses" placeholder="Search by Class ID or Name">
+                        </div>
+
+                        <!-- Table for Registered Classes -->
+                        <table class="table table-bordered mt-3" id="classTable">
+                            <thead>
+                                <tr>
+                                    <th>Class ID</th>
+                                    <th>Class Name</th>
+                                    <th>Teacher</th>
+                                    <th>Schedule</th>
+                                    <th>Fee</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>001</td>
+                                    <td>Mathematics</td>
+                                    <td>John Doe</td>
+                                    <td>Monday 10 AM</td>
+                                    <td>$50</td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm" onclick="updateClass()">Update</button>
+                                        <button class="btn btn-danger btn-sm" onclick="deleteClass()">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-primary text-white text-center py-3 mt-5">
+        <p>&copy; 2025 Vidula Class Center. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function viewClassDetails() {
+            let classID = document.getElementById('viewClassID').value;
+            alert('Viewing details for class ID: ' + classID);
+        }
+
+        function updateClass(id) {
+            alert('Updating class ID: ' + id);
+        }
+
+        function deleteClass(id) {
+            if (confirm('Are you sure you want to delete class ID: ' + id + '?')) {
+                alert('Deleted class ID: ' + id);
+            }
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
