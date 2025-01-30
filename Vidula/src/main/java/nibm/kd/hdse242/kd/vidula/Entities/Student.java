@@ -1,18 +1,23 @@
 package nibm.kd.hdse242.kd.vidula.Entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "students")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String studentID;
+
     private String studentName;
     private String studentAddress;
     private String grade;
     private String gender;
     private String classes;
+
+    public Student() {
+
+    }
 
     public Student(String studentID, String studentName, String studentAddress, String grade, String gender, String classes) {
         this.studentID = studentID;
@@ -70,5 +75,4 @@ public class Student {
     public void setClasses(String classes) {
         this.classes = classes;
     }
-
 }

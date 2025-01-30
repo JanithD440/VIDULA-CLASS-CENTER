@@ -2,10 +2,13 @@ package nibm.kd.hdse242.kd.vidula.Controllers;
 
 import nibm.kd.hdse242.kd.vidula.Entities.Teacher;
 import nibm.kd.hdse242.kd.vidula.Services.TeacherService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/v2/teacher")
 public class TeacherController {
@@ -14,25 +17,29 @@ public class TeacherController {
     public TeacherController(TeacherService teacherService) {
         this.teacherService = teacherService;
     }
-
     @GetMapping
-    public List<Teacher> getAllTeachers() {
-        return teacherService.getAllTeachers();
+    public ResponseEntity<List<Teacher>> getAllTeachers() {
+        return ResponseEntity.ok(teacherService.getAllTeachers());
     }
+
     @GetMapping("/{id}")
-    public Teacher getTeacher(@PathVariable String id) {
-        return teacherService.getTeacherById(id);
+    public ResponseEntity<Teacher> getTeacher(@PathVariable String id) {
+        return ResponseEntity.ok(teacherService.getTeacherById(id));
     }
+
     @PostMapping
-    public Teacher addTeacher(@RequestBody Teacher teacher) {
-        return teacherService.addTeacher(teacher);
+    public ResponseEntity<Teacher> addTeacher(@RequestBody Teacher teacher) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.addTeacher(teacher));
     }
+
     @PutMapping("/{id}")
-    public Teacher updateTeacher(@PathVariable String id, @RequestBody Teacher teacher) {
-        return teacherService.updateTeacherById(id, teacher);
+    public ResponseEntity<Teacher> updateTeacher(@PathVariable String id,@RequestBody Teacher teacher) {
+        return ResponseEntity.ok(teacherService.updateTeacherById(id, teacher));
     }
+
     @DeleteMapping("/{id}")
-    public void deleteTeacher(@PathVariable String id) {
+    public ResponseEntity<Void> deleteTeacher(@PathVariable String id) {
         teacherService.deleteTeacherById(id);
+        return ResponseEntity.noContent().build();
     }
 }
